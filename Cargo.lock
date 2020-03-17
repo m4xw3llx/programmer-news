@@ -515,6 +515,7 @@ dependencies = [
 name = "programmer-news"
 version = "0.1.0"
 dependencies = [
+ "bytes",
  "chrono",
  "hyper",
  "hyper-tls",

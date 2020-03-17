@@ -1,11 +1,11 @@
 extern crate chrono;
 
 use chrono::{DateTime, Utc};
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
 type Url = String;
 
-#[derive(Serialize)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct LobsterArticle {
     pub short_id: String,
     pub short_id_url: Url,

@@ -10,7 +10,7 @@ async fn main() {
 
     let result = services::lobste::fetch_lobste(HOTTEST).await;
     match result {
-        Ok(_) => println!("Success"),
+        Ok(articles) => println!("Success: {:?}", articles),
         Err(error) => println!("Main execute error is {:?}", error),
     };
 }
