@@ -5,6 +5,8 @@ use hyper::Client;
 use hyper_tls::HttpsConnector;
 use tokio::io::{stdout, AsyncWriteExt as _};
 
+mod models;
+
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     let https = HttpsConnector::new();
