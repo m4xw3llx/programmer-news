@@ -1,24 +1,16 @@
 extern crate hyper;
 
-use hyper::body::HttpBody as _;
-use hyper::Client;
-use hyper_tls::HttpsConnector;
-use tokio::io::{stdout, AsyncWriteExt as _};
-
+mod config;
 mod models;
+mod services;
 
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-    let https = HttpsConnector::new();
-    let client = Client::builder().build::<_, hyper::Body>(https);
-    let uri = "http://httpbin.org/ip".parse()?;
+async fn main() {
+    use services::lobste::LobsteAPI::*;
 
-    let mut resp = client.get(uri).await?;
-    println!("Response: {}", resp.status());
-
-    while let Some(chunk) = resp.body_mut().data().await {
-        stdout().write_all(&chunk?).await?;
-    }
-
-    Ok(())
+    let result = services::lobste::fetch_lobste(HOTTEST).await;
+    match result {
+        Ok(_) => println!("Success"),
+        Err(error) => println!("Main execute error is {:?}", error),
+    };
 }
