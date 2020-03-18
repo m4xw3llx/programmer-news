@@ -34,7 +34,7 @@ pub async fn fetch_lobste(
 
     let url = api.value().parse().unwrap();
     let res = client.get(url).await?;
-    let body = hyper::body::aggregate(res).await?;
+    let body = aggregate(res).await?;
 
     let articles = from_reader(body.reader())?;
 
